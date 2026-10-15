@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff5f8" />
+  <title>Birthday Wish</title>
+  <style>
+    :root {
+      --pink: #ff5f93;
+      --pink-dark: #ed3976;
+      --purple: #8b5cf6;
+      --ink: #30233b;
+      --muted: #786b82;
+      --paper: #fffafd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: system-ui, -apple-system, "Noto Sans Bengali", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #ffe1ed 0, transparent 28%),
+        radial-gradient(circle at 92% 25%, #e8e0ff 0, transparent 25%),
+        linear-gradient(135deg, #fff7fa, #f8f5ff);
+    }
+    .page { width: min(100% - 28px, 920px); margin: 0 auto; padding: 22px 0 38px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:26px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:850; letter-spacing:-.5px; font-size:1.15rem; }
+    .brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:15px; background:linear-gradient(135deg,var(--pink),var(--purple)); color:white; box-shadow:0 8px 20px #d96b9b44; font-size:22px; }
+    .tag { color:#9a5575; background:#fff; border:1px solid #f5dce8; border-radius:999px; padding:8px 12px; font-size:.78rem; font-weight:700; }
+    .hero { text-align:center; padding:18px 6px 24px; }
+    .eyebrow { display:inline-block; color:var(--pink-dark); background:#fff; border:1px solid #ffd5e4; border-radius:999px; padding:7px 12px; font-size:.8rem; font-weight:800; }
+    h1 { font-size:clamp(2.3rem, 9vw, 4.5rem); line-height:1.05; margin:17px 0 12px; letter-spacing:-2px; }
+    h1 span { background:linear-gradient(90deg,#f43f83,#8b5cf6); color:transparent; background-clip:text; -webkit-background-clip:text; }
+    .subtitle { max-width:560px; margin:0 auto; color:var(--muted); line-height:1.75; font-size:1rem; }
+    .decor { font-size:clamp(1.5rem, 5vw, 2.2rem); letter-spacing:8px; margin-top:18px; animation:float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .layout { display:grid; grid-template-columns:1fr; gap:18px; align-items:start; }
+    .card { background:#ffffffd9; border:1px solid #f3dfeb; border-radius:25px; padding:22px; box-shadow:0 16px 45px #64436b12; backdrop-filter:blur(10px); }
+    .card h2 { font-size:1.25rem; margin:0 0 5px; }
+    .hint { color:var(--muted); font-size:.9rem; margin:0 0 20px; line-height:1.6; }
+    .field { margin-bottom:17px; }
+    label { display:block; font-weight:750; font-size:.91rem; margin-bottom:8px; }
+    input, textarea { width:100%; border:1.5px solid #eadce8; background:#fff; border-radius:13px; padding:13px 14px; font:inherit; color:var(--ink); outline:none; transition:.2s; }
+    input:focus, textarea:focus { border-color:#ee77a5; box-shadow:0 0 0 4px #ff5f931c; }
+    textarea { min-height:92px; resize:vertical; }
+    .gender-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .gender-option { position:relative; }
+    .gender-option input { position:absolute; opacity:0; pointer-events:none; }
+    .gender-option span { display:flex; justify-content:center; align-items:center; gap:8px; padding:13px 10px; border:1.5px solid #eadce8; background:#fff; border-radius:13px; font-weight:750; cursor:pointer; transition:.2s; }
+    .gender-option input:checked + span { border-color:var(--pink); background:#fff0f6; color:#c92767; box-shadow:0 0 0 3px #ff5f9312; }
+    .primary { width:100%; border:0; border-radius:14px; padding:15px 18px; background:linear-gradient(100deg,#ff5f93,#9a67f7); color:#fff; font:inherit; font-weight:850; font-size:1rem; cursor:pointer; box-shadow:0 10px 22px #e95c9933; transition:transform .18s,filter .18s; }
+    .primary:hover { filter:brightness(1.03); transform:translateY(-1px); }
+    .primary:active { transform:translateY(1px); }
+    .preview { display:none; margin-top:18px; padding:18px; border-radius:18px; background:linear-gradient(145deg,#fff1f7,#f3edff); border:1px solid #f1d8e8; }
+    .preview.show { display:block; animation:appear .35s ease both; }
+    @keyframes appear { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .preview-top { font-size:2.2rem; text-align:center; margin-bottom:5px; }
+    .preview h3 { text-align:center; margin:4px 0 8px; font-size:1.4rem; }
+    .preview p { color:#66566e; line-height:1.65; text-align:center; overflow-wrap:anywhere; }
+    .preview .small { font-size:.8rem; color:#8a758e; }
+    .copy-note { display:none; text-align:center; color:#28734b; font-size:.85rem; margin-top:10px; }
+    .copy-note.show { display:block; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+    .feature { text-align:center; background:#ffffffa8; border:1px solid #f3e2ed; border-radius:16px; padding:13px 7px; }
+    .feature b { display:block; font-size:1.35rem; margin-bottom:5px; }
+    .feature span { font-size:.75rem; color:var(--muted); font-weight:650; }
+    footer { text-align:center; color:#9b8ba1; font-size:.78rem; padding:25px 10px 0; }
+    @media (min-width:760px) {
+      .page { padding-top:28px; }
+      .hero { padding:26px 6px 32px; }
+      .layout { grid-template-columns:1.05fr .95fr; gap:22px; }
+      .card { padding:28px; }
+      .preview-card { position:sticky; top:20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="brand"><div class="brand-mark">🎂</div> Birthday Wish</div>
+      <div class="tag">✨ Make it special</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">💌 A little surprise, a lot of love</div>
+      <h1>Make their day <span>magical!</span></h1>
+      <p class="subtitle">প্রিয় মানুষের জন্মদিনে পাঠাও নিজের মতো করে সাজানো একটি সুন্দর wish। Version 1-এ তোমার wish-এর basic design তৈরি করে দেখো।</p>
+      <div class="decor" aria-hidden="true">🎈 💖 🎁 🎉</div>
+    </section>
+
+    <section class="layout">
+      <div class="card">
+        <h2>তোমার Birthday Wish তৈরি করো</h2>
+        <p class="hint">নিচের তথ্যগুলো পূরণ করো। তারপর “Preview Wish” চাপলে তোমার wish-এর preview দেখা যাবে।</p>
+        <form id="wishForm">
+          <div class="field">
+            <label>Birthday person কে? 🎀</label>
+            <div class="gender-options">
+              <label class="gender-option">
+                <input type="radio" name="gender" value="girl" checked>
+                <span>👧 মেয়ে</span>
+              </label>
+              <label class="gender-option">
+                <input type="radio" name="gender" value="boy">
+                <span>👦 ছেলে</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="sender">তোমার নাম (Sender) 💌</label>
+            <input id="sender" name="sender" maxlength="50" placeholder="যেমন: Rahim" required>
+          </div>
+          <div class="field">
+            <label for="recipient">যার জন্মদিন (Birthday person) 🎂</label>
+            <input id="recipient" name="recipient" maxlength="50" placeholder="যেমন: Ayesha" required>
+          </div>
+          <div class="field">
+            <label for="message">ছোট্ট মেসেজ (ঐচ্ছিক) 💖</label>
+            <textarea id="message" name="message" maxlength="240" placeholder="তোমার জন্য অনেক অনেক ভালোবাসা..."></textarea>
+          </div>
+          <button class="primary" type="submit">✨ Preview Wish</button>
+        </form>
+        <div class="preview" id="preview" aria-live="polite">
+          <div class="preview-top" id="previewEmoji">🎀</div>
+          <h3 id="previewTitle">Happy Birthday!</h3>
+          <p id="previewText"></p>
+          <p id="previewMessage"></p>
+          <p class="small">এটি Version 1-এর local preview — এখনো shareable unique link তৈরি হয় না।</p>
+          <button class="primary" id="copyButton" type="button">📋 Wish text কপি করো</button>
+          <div class="copy-note" id="copyNote">কপি হয়েছে! 💖</div>
+        </div>
+      </div>
+
+      <aside class="card preview-card">
+        <h2>একটা ছোট্ট সারপ্রাইজ 💝</h2>
+        <p class="hint">এখন শুধু প্রথম ধাপ। পরের ভার্সনগুলোতে আমরা animation, balloon pop, envelope, birthday party আর unique link যোগ করব।</p>
+        <div class="features">
+          <div class="feature"><b>🎈</b><span>Balloon fun</span></div>
+          <div class="feature"><b>💌</b><span>Personal wish</span></div>
+          <div class="feature"><b>🎉</b><span>Party time</span></div>
+        </div>
+        <div style="margin-top:20px;padding:18px;border-radius:18px;background:linear-gradient(145deg,#fff1f7,#f2edff);text-align:center;">
+          <div style="font-size:3.5rem;line-height:1.3;">🎂</div>
+          <div style="font-weight:850;font-size:1.05rem;">Made with love</div>
+          <div style="font-size:.86rem;color:#786b82;margin-top:5px;">একটি wish, অনেকগুলো হাসি ✨</div>
+        </div>
+      </aside>
+    </section>
+    <footer>Birthday Wish · Version 1.0 · Made with 💗</footer>
+  </main>
+  <script>
+    const form = document.getElementById('wishForm');
+    const preview = document.getElementById('preview');
+    const copyButton = document.getElementById('copyButton');
+    const copyNote = document.getElementById('copyNote');
+    let currentWishText = '';
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const sender = document.getElementById('sender').value.trim();
+      const recipient = document.getElementById('recipient').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const gender = form.querySelector('input[name="gender"]:checked').value;
+      if (!sender || !recipient) return;
+
+      document.getElementById('previewEmoji').textContent = gender === 'girl' ? '🎀💖🎀' : '🎉💙🎉';
+      document.getElementById('previewTitle').textContent = `Happy Birthday, ${recipient}!`;
+      document.getElementById('previewText').textContent = `From ${sender}, with lots of love 💌`;
+      document.getElementById('previewMessage').textContent = message || 'তোমার দিনটা হাসি, আনন্দ আর ভালোবাসায় ভরে উঠুক! ✨';
+      currentWishText = `Happy Birthday, ${recipient}!\\nFrom ${sender}, with lots of love 💌\\n${message || 'তোমার দিনটা হাসি, আনন্দ আর ভালোবাসায় ভরে উঠুক! ✨'}`;
+      preview.classList.add('show');
+      copyNote.classList.remove('show');
+      preview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(currentWishText);
+        copyNote.textContent = 'কপি হয়েছে! 💖';
+      } catch (error) {
+        copyNote.textContent = 'কপি করা যায়নি—wish text select করে কপি করো।';
+      }
+      copyNote.classList.add('show');
+    });
+  </script>
+</body>
+</html>
