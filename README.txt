@@ -1,20 +1,19 @@
-BIRTHDAY WISH — VERSION 1
+Birthday Wish — Version 2.0
 
-এই ZIP-এর মধ্যে আছে:
-- index.html: সম্পূর্ণ ওয়েবসাইট
-- README.txt: চালানোর নিয়ম
+Features:
+- Select birthday person's gender
+- Enter sender and recipient names
+- Choose either manual age or date of birth
+- Balloon count matches the entered/calculated age (1–120)
+- Each popped balloon reveals a sweet message
+- After all balloons are popped, a double-tap envelope opens
+- Countdown, birthday letter, and confetti animation
+- Copy wish text
 
-Android ফোনে চালানোর নিয়ম:
-1. ZIP ফাইলটি ডাউনলোড করো।
-2. Files / File Manager অ্যাপ খুলে Downloads-এ যাও।
-3. birthday_wish_v1.zip ফাইলটি চাপ দিয়ে Extract/Unzip করো।
-4. birthday_wish_v1 ফোল্ডারের ভেতরে index.html ফাইলটি খুঁজে বের করো।
-5. index.html-এ চাপ দাও এবং Chrome বা অন্য browser দিয়ে খোলো।
-   যদি File Manager থেকে না খোলে, তাহলে ZIP extract করার পর index.html ফাইলটি browser-এ খোলার অপশন বেছে নাও।
-6. Sender name, Birthday person-এর নাম এবং চাইলে message লিখে “Preview Wish” চাপো।
-7. “Wish text কপি করো” চাপলে preview text কপি করার চেষ্টা করবে।
+How to use on Android:
+1. Download and extract birthday_wish_v2.zip.
+2. Open the birthday_wish_v2 folder in File Manager.
+3. Tap index.html and open it with Chrome.
+4. Fill the form and tap Preview Wish.
 
-গুরুত্বপূর্ণ:
-- এটি Version 1: ডিজাইন ও local preview।
-- এই ভার্সনে wish অনলাইনে save হয় না এবং unique shareable link তৈরি হয় না।
-- পরের ভার্সনে balloon/envelope animation যোগ করব। এরপর backend/hosting দিয়ে প্রত্যেক wish-এর আলাদা link বানাব।
+Note: This is a local browser prototype. It does not yet create online unique shareable links or save wishes to a database.
